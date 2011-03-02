@@ -1,0 +1,4 @@
+clap WAVE clap.wav
+correct WAVE correct.wav
+read WAVE read.wav
+wrong WAVE Wrong.wav
