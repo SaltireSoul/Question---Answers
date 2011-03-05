@@ -61,6 +61,8 @@ type
     Procedure LoadSettings;
     Function  CheckSettingsFile:boolean;
     Procedure SetProgramPath;
+    Procedure LoadLang;
+    Procedure SetLang;
   end;
 
 var
@@ -88,6 +90,8 @@ var
 
   CustomMessage:boolean=false;
   CustomSounds:boolean=false;
+
+  Lang:Array[1..38] of WideString;
 
 implementation
 
@@ -171,7 +175,7 @@ begin
     end
   else
     begin
-      Application.MessageBox('You Must Select A File','File Not Found',0)
+      Application.MessageBox(PAnsiChar(String(Lang[1])),PAnsiChar(String(Lang[2])),0)
     end;
 end;
 
@@ -231,6 +235,9 @@ begin
       Filename:=ParamStr(1);
       FileList.ApplyFilePath(ParamStr(1));
     end;
+
+  LoadLang;
+  SetLang;
 end;
 
 procedure TTeachersForm.RegEditor(ExtName:string; AppName:String);
@@ -379,7 +386,7 @@ begin
   SettingFileName:=ProgramPath+Settings;
   If CheckSettingsFile=True then
     begin
-    showmessage(SettingFileName);
+    //showmessage(SettingFileName);
       AssignFile(Fileout,SettingFileName);
       ReWrite(Fileout);
 
@@ -419,5 +426,79 @@ procedure TTeachersForm.SetProgramPath;
 begin
    ProgramPath := ExtractFilePath(ParamStr(0));
 end;
+
+procedure TTeachersForm.LoadLang;
+begin
+//Load lang from ini
+  filename:=ProgramPath+'lang.ini';
+  If FileExists(filename) then begin
+    IniFile := TIniFile.Create (filename);
+
+    Lang[1] := inifile.ReadString ('Quiz', 'InternalMsg1', text);
+    Lang[2] := inifile.ReadString ('Quiz', 'InternalMsg2', text);
+    Lang[3] := inifile.ReadString ('Quiz', 'File', text);
+    Lang[4] := inifile.ReadString ('Quiz', 'Start', text);
+    Lang[5] := inifile.ReadString ('Quiz', 'Exit', text);
+    Lang[6] := inifile.ReadString ('Quiz', 'Tools', text);
+    Lang[7] := inifile.ReadString ('Quiz', 'FileTypes', text);
+    Lang[8] := inifile.ReadString ('Quiz', 'CustomText', text);
+    Lang[9] := inifile.ReadString ('Quiz', 'CustomSound', text);
+    Lang[10] := inifile.ReadString ('Quiz', 'Help', text);
+    Lang[11] := inifile.ReadString ('Quiz', 'Contents', text);
+    Lang[12] := inifile.ReadString ('Quiz', 'Index', text);
+    Lang[13] := inifile.ReadString ('Quiz', 'About', text);
+    Lang[14] := inifile.ReadString ('Quiz', 'SelectTopic', text);
+    Lang[15] := inifile.ReadString ('Quiz', 'Timer', text);
+    Lang[16] := inifile.ReadString ('Quiz', 'SetTimer', text);
+    Lang[17] := inifile.ReadString ('Quiz', 'TopicName', text);
+    Lang[18] := inifile.ReadString ('Quiz', 'TimeLeft', text);
+    Lang[19] := inifile.ReadString ('Quiz', 'Score', text);
+    Lang[20] := inifile.ReadString ('Quiz', 'CorrectAnswer', text);
+    Lang[21] := inifile.ReadString ('Quiz', 'AnswerCorrect', text);
+    Lang[22] := inifile.ReadString ('Quiz', 'AnswerWrong', text);
+    Lang[23] := inifile.ReadString ('Quiz', 'Result90', text);
+    Lang[24] := inifile.ReadString ('Quiz', 'Result75', text);
+    Lang[25] := inifile.ReadString ('Quiz', 'Result55', text);
+    Lang[26] := inifile.ReadString ('Quiz', 'Result40', text);
+    Lang[27] := inifile.ReadString ('Quiz', 'Result0', text);
+    Lang[28] := inifile.ReadString ('Quiz', 'Next', text);
+    Lang[29] := inifile.ReadString ('Quiz', 'Reset', text);
+    Lang[30] := inifile.ReadString ('Quiz', 'NewQuiz', text);
+    Lang[31] := inifile.ReadString ('Quiz', 'OK', text);
+    Lang[32] := inifile.ReadString ('Quiz', 'YouScored', text);
+    Lang[33] := inifile.ReadString ('Quiz', 'YouGot', text);
+    Lang[34] := inifile.ReadString ('Quiz', 'OutOf', text);
+    Lang[35] := inifile.ReadString ('Quiz', 'ProductName', text);
+    Lang[36] := inifile.ReadString ('Quiz', 'Version', text);
+    Lang[37] := inifile.ReadString ('Quiz', 'Copyright', text);
+    Lang[38] := inifile.ReadString ('Quiz', 'Comments', text);
+
+    IniFile.Destroy;
+  end
+  else begin
+     Application.MessageBox('Language file lang.ini not found in folder','Language Missing',0);
+     Application.Terminate;
+  end;
+end;
+
+procedure TTeachersForm.SetLang;
+begin
+   FileMenu.Caption := Lang[3];
+   StartQuiz.Caption := '&'+Lang[4];
+   EndQuiz.Caption := '&'+Lang[5];
+   Tools1.Caption := '&'+Lang[6];
+   RegisterFileTypes.Caption := Lang[7];
+   UseCustomText.Caption := Lang[8];
+   UseCustomSounds.Caption := Lang[9];
+   HelpMenu.Caption := '&'+Lang[10];
+   DisplayHelpContents.Caption := '&'+Lang[11];
+   DisplayHelpIndex.Caption := '&'+Lang[12];
+   AboutBtn.Caption := '&'+Lang[13];
+   FileSelectionGbox.Caption := Lang[14];
+   TimerSelectGbox.Caption := Lang[15];
+   TimeLbl.Caption := Lang[16];
+   TopicName.Caption := Lang[17];
+   StartBtn.Caption := Lang[4];
+end;              
 
 end.

@@ -1,6 +1,6 @@
 object OutputForm: TOutputForm
-  Left = 390
-  Top = 226
+  Left = 248
+  Top = 686
   Width = 370
   Height = 277
   BorderIcons = [biSystemMenu]

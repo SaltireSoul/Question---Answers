@@ -105,15 +105,11 @@ HostApplication=
 Launcher=
 UseLauncher=0
 DebugCWD=
-[Language]
-ActiveLang=
-ProjectLang=$00000809
-RootDir=
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=3
-MinorVer=2
+MinorVer=3
 Release=0
 Build=0
 Debug=0
@@ -126,13 +122,13 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Arch Technologies
 FileDescription=Question Paper Maker
-FileVersion=3.2.0.0
+FileVersion=3.3.0.0
 InternalName=MAKER.EXE
-LegalCopyright=Copyright © Arch Technologies 2007
+LegalCopyright=Copyright © Arch Technologies 2008
 LegalTrademarks=
 OriginalFilename=MAKER.EXE
 ProductName=Question Maker
-ProductVersion=3.2
+ProductVersion=3.3
 Comment=
 Author=Paul-Robert Archibald
 3rd Part Components=XPMenu & DeftEdit

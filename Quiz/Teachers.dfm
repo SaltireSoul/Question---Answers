@@ -1,6 +1,6 @@
 object TeachersForm: TTeachersForm
-  Left = 247
-  Top = 340
+  Left = 251
+  Top = 606
   Width = 417
   Height = 367
   HelpContext = 1

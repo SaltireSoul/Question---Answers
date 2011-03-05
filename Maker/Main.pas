@@ -11,7 +11,6 @@ type
   TMakerForm = class(TForm)
     TopicNameEd: TEdit;
     TopicLbl: TStaticText;
-    NoQuestionsEd: TEdit;
     NumberLbl: TStaticText;
     PanelTop: TPanel;
     PanelBottom: TPanel;
@@ -44,6 +43,9 @@ type
     RegisterFileTypesMM: TMenuItem;
     ImageList1: TImageList;
     StatusBar1: TStatusBar;
+    QuestionNoLbl: TLabel;
+    Label2: TLabel;
+    NoQuestionsLbl: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ExitBtnClick(Sender: TObject);
     procedure NextBtnClick(Sender: TObject);
@@ -73,6 +75,12 @@ type
     Procedure RegQuiz(ExtName:string; AppName:String);
     Procedure ClearStatus;
     Procedure AutoLoadFile;
+    Procedure LoadLang;
+    Procedure SetLang;
+    Function CurrentQ:string;
+    Function TotalQ:string;
+    function CountNextQuestion : string;
+    function CountBackQuestion : string;
   end;
 
 var
@@ -92,6 +100,8 @@ var
   ReOpenCount:integer=0;         //Sets the Number of Questions in the Old File
   NeedText:boolean=true;      	 //Indicates if there is a need for more text before saving
 
+  Lang:Array[1..17] of WideString;
+
 implementation
 
 {$R *.DFM}
@@ -100,7 +110,7 @@ implementation
 procedure TMakerForm.NextBtnClick(Sender: TObject);
 begin
     if (Answer1Ed.Text=CorrectAnswerEd.text) or (Answer2Ed.Text=CorrectAnswerEd.text) or  (Answer3Ed.Text=CorrectAnswerEd.text) or (Answer4Ed.Text=CorrectAnswerEd.text) then NextQuestion
-    else StatusBar1.SimpleText:='None of Your Possible Answer Match the Correct Answer';
+    else StatusBar1.SimpleText:=Lang[1];
 end;
 
 procedure TMakerForm.BackBtnClick(Sender: TObject);
@@ -146,34 +156,17 @@ end;
 
 
 
-{My Own Functions & Procedures}
-function CountNextQuestion : string;
-{
-  Calculates the Current Question Number
-}
-begin
-  CurrentQuestion:=CurrentQuestion+1;
-  Result:='Q'+inttostr(CurrentQuestion);
-end;
-
-function CountBackQuestion : string;
-{
-  Calculates the Previous Question Number
-}
-begin
-  CurrentQuestion:=CurrentQuestion-1;
-  Result:='Q'+inttostr(CurrentQuestion);
-end;
-
 procedure TMakerForm.ExitProgram;
 {
   Code To End Application
 }
 begin
+  if (FileName<>'') then begin
   with IniFile do
     begin
       Free;                   //Closes INI file and frees up the memory used, and doesn't report an error if not initalized
     end;
+  end;
   Application.Terminate;      //Exit Program
 end;
 
@@ -207,13 +200,15 @@ begin
   if FileName<>'' then
     begin
       CurrentQuestion:=1;
-      NoQuestionsEd.Text:=inttostr(currentquestion);
+      QuestionNoLbl.Caption:=CurrentQ;
 
       IniFile := TIniFile.Create (FileName); //Open File
       MakerForm.Caption:='Question Maker - ' + FileName;
       EnableForm;
       ReadQuestion;
       ReOpenCount := inifile.readinteger('Main','Questions',ReOpenCount);
+      NoOfQuestions := ReOpenCount;
+      NoQuestionsLbl.Caption:=TotalQ;
       ReOpen:=true;
     end;
 
@@ -247,7 +242,8 @@ end;
 procedure TMakerForm.EnableForm;
 begin
   TopicNameEd.Visible:=true;
-  NoQuestionsEd.Visible:=true;
+  QuestionNoLbl.Visible:=true;
+  NoQuestionsLbl.Visible:=true;
   QuestionEd.Visible:=true;
   Answer1Ed.Visible:=true;
   Answer2Ed.Visible:=true;
@@ -274,13 +270,13 @@ procedure TMakerForm.Save;
 begin
   if (TopicNameEd.text='') or (QuestionEd.text='') or (Answer1Ed.text='') or (Answer2Ed.text='') or (Answer3Ed.text='') or (Answer4Ed.text='') or (Answer1Ed.text='') or (CorrectAnswerEd.text='') then
     begin
-      StatusBar1.SimpleText:='You need to fill in all the fields before saving';
+      StatusBar1.SimpleText:=Lang[4];
       NeedText:=true;
     end
   else
     begin
       inifile.WriteString ('Main', 'Topic', TopicNameEd.text);  //Write in the Topic to the inifile
-      inifile.WriteInteger('Main', 'Questions', currentquestion);  //Write in the No Of Questions to the inifile
+      inifile.WriteInteger('Main', 'Questions', NoOfQuestions);  //Write in the No Of Questions to the inifile
       inifile.WriteString (QuestionNo, 'Question', QuestionEd.text);  //Write in the Question to the inifile
       inifile.WriteString (QuestionNo, 'Answer1', Answer1Ed.text);  //Write in the Possible Answer 1 to the inifile
       inifile.WriteString (QuestionNo, 'Answer2', Answer2Ed.text);  //Write in the Possible Answer 2 to the inifile
@@ -293,12 +289,14 @@ end;
 
 procedure TMakerForm.NextQuestion;
 begin
+  if (CurrentQuestion > NoOfQuestions) then NoOfQuestions := CurrentQuestion;
   Save;
   
   if NeedText=false then
     begin
       QuestionNo:=CountNextQuestion;
-      NoQuestionsEd.Text:=inttostr(currentquestion);
+      QuestionNoLbl.Caption:=CurrentQ;
+      NoQuestionsLbl.Caption:=TotalQ;
 
      if CurrentQuestion > ReOpenCount then
        begin
@@ -330,13 +328,13 @@ begin
         end;
 
       QuestionNo:=CountBackQuestion;
-      NoQuestionsEd.Text:=inttostr(currentquestion);
+      QuestionNoLbl.Caption:=CurrentQ;
       ReadQuestion;
       ClearStatus;
     end
   else
     begin
-      StatusBar1.SimpleText:='You can not Go back any further';
+      StatusBar1.SimpleText:=Lang[2];
     end;
 end;
 
@@ -357,7 +355,8 @@ begin
   //when changing visiblity to StudentsForm or changing a
   //value in that Form
   RegQuiz('QQQ',ExtractFilePath(ParamStr(0))+'Quiz.exe');
-  Application.MessageBox('Files Registered','Register File Types',0);
+  //Application.MessageBox('Files Registered','Register File Types',0);
+  Application.MessageBox(PAnsiChar(String(Lang[3])),PAnsiChar(String(Lang[9])),0);
 end;
 
 procedure TMakerForm.RegEditor(ExtName:string; AppName:String);
@@ -410,6 +409,9 @@ begin
       Filename:=ParamStr(1);
       AutoLoadFile;
     end;
+
+  LoadLang;
+  SetLang;
 end;
 
 procedure TMakerForm.AutoLoadFile;
@@ -417,15 +419,95 @@ begin
   if FileName<>'' then
     begin
       CurrentQuestion:=1;
-      NoQuestionsEd.Text:=inttostr(currentquestion);
+      QuestionNoLbl.Caption:=CurrentQ;
 
       IniFile := TIniFile.Create (FileName); //Open File
       MakerForm.Caption:='Question Maker - ' + FileName;
       EnableForm;
       ReadQuestion;
       ReOpenCount := inifile.readinteger('Main','Questions',ReOpenCount);
+      NoOfQuestions := ReOpenCount;
+      NoQuestionsLbl.Caption:=TotalQ;
       ReOpen:=true;
     end;
+end;
+
+procedure TMakerForm.LoadLang;
+var langfilename:string;
+begin
+//Load lang from ini
+  langfilename:=ExtractFilePath(ParamStr(0))+'lang.ini';
+  If FileExists(langfilename) then begin
+    IniFile := TIniFile.Create (langfilename);
+
+    Lang[1] := inifile.ReadString ('Maker', 'InternalMsg1', text);
+    Lang[2] := inifile.ReadString ('Maker', 'InternalMsg2', text);
+    Lang[3] := inifile.ReadString ('Maker', 'InternalMsg3', text);
+    Lang[4] := inifile.ReadString ('Maker', 'InternalMsg4', text);
+    Lang[5] := inifile.ReadString ('Maker', 'File', text);
+    Lang[6] := inifile.ReadString ('Maker', 'New', text);
+    Lang[7] := inifile.ReadString ('Maker', 'Open', text);
+    Lang[8] := inifile.ReadString ('Maker', 'Save', text);
+    Lang[9] := inifile.ReadString ('Maker', 'FileTypes', text);
+    Lang[10] := inifile.ReadString ('Maker', 'Exit', text);
+    Lang[11] := inifile.ReadString ('Maker', 'TopicName', text);
+    Lang[12] := inifile.ReadString ('Maker', 'QuestionNum', text);
+    Lang[13] := inifile.ReadString ('Maker', 'Question', text);
+    Lang[14] := inifile.ReadString ('Maker', 'Answer', text);
+    Lang[15] := inifile.ReadString ('Maker', 'CorrectAnswer', text);
+    Lang[16] := inifile.ReadString ('Maker', 'Back', text);
+    Lang[17] := inifile.ReadString ('Maker', 'Next', text);
+
+    IniFile.Destroy;
+  end
+  else begin
+     Application.MessageBox('Language file lang.ini not found in folder','Language Missing',0);
+     Application.Terminate;
+  end;
+end;
+
+procedure TMakerForm.SetLang;
+begin
+   FileMenu.Caption := Lang[5];
+   NewFileMM.Caption := Lang[6];
+   OpenFileMM.Caption := Lang[7];
+   SaveFileMM.Caption := Lang[8];
+   RegisterFileTypesMM.Caption := Lang[9];
+   ExitMM.Caption := Lang[10];
+   TopicLbl.Caption := Lang[11]+':';
+   NumberLbl.Caption := Lang[12]+':';
+   QuestionLbl.Caption := Lang[13]+':';
+   Answer1Lbl.Caption := Lang[14]+' 1:';
+   Answer2Lbl.Caption := Lang[14]+' 2:';
+   Answer3Lbl.Caption := Lang[14]+' 3:';
+   Answer4Lbl.Caption := Lang[14]+' 4:';
+   CorrectAnswerLbl.Caption := Lang[15]+':';
+   ExitBtn.Caption := Lang[10];
+   BackBtn.Caption := '< '+Lang[16];
+   SaveBtn.Caption := Lang[8];
+   NextBtn.Caption := Lang[17]+' >';
+end;
+
+function TMakerForm.CurrentQ: string;
+begin
+   Result := IntToStr(CurrentQuestion);
+end;
+
+function TMakerForm.TotalQ: string;
+begin
+   Result := IntToStr(NoOfQuestions);
+end;
+
+function TMakerForm.CountBackQuestion: string;
+begin
+  CurrentQuestion:=CurrentQuestion-1;
+  Result:='Q'+CurrentQ;
+end;
+
+function TMakerForm.CountNextQuestion: string;
+begin
+  CurrentQuestion:=CurrentQuestion+1;
+  Result:='Q'+CurrentQ;
 end;
 
 end.

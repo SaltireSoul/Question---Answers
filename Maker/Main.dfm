@@ -1,6 +1,6 @@
 object MakerForm: TMakerForm
-  Left = 281
-  Top = 146
+  Left = 274
+  Top = 342
   HorzScrollBar.Smooth = True
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
@@ -258,7 +258,7 @@ object MakerForm: TMakerForm
     Left = 0
     Top = 0
     Width = 792
-    Height = 41
+    Height = 49
     Align = alTop
     BevelOuter = bvSpace
     Font.Charset = ANSI_CHARSET
@@ -267,8 +267,30 @@ object MakerForm: TMakerForm
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 3
     Visible = False
+    object QuestionNoLbl: TLabel
+      Left = 712
+      Top = 8
+      Width = 9
+      Height = 19
+      Caption = '1'
+    end
+    object Label2: TLabel
+      Left = 741
+      Top = 8
+      Width = 9
+      Height = 19
+      AutoSize = False
+      Caption = '/'
+    end
+    object NoQuestionsLbl: TLabel
+      Left = 750
+      Top = 8
+      Width = 9
+      Height = 19
+      Caption = '1'
+    end
   end
   object TopicLbl: TStaticText
     Left = 32
@@ -285,25 +307,8 @@ object MakerForm: TMakerForm
     TabOrder = 1
     Visible = False
   end
-  object NoQuestionsEd: TEdit
-    Left = 728
-    Top = 8
-    Width = 41
-    Height = 24
-    TabStop = False
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    ReadOnly = True
-    TabOrder = 2
-    Text = '1'
-    Visible = False
-  end
   object NumberLbl: TStaticText
-    Left = 592
+    Left = 576
     Top = 8
     Width = 135
     Height = 23
@@ -314,7 +319,7 @@ object MakerForm: TMakerForm
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 2
     Visible = False
   end
   object TopicNameEd: TEdit
@@ -335,9 +340,9 @@ object MakerForm: TMakerForm
   end
   object PanelBottom: TPanel
     Left = 0
-    Top = 41
+    Top = 49
     Width = 792
-    Height = 511
+    Height = 503
     Align = alClient
     BevelOuter = bvSpace
     Font.Charset = ANSI_CHARSET
@@ -346,11 +351,11 @@ object MakerForm: TMakerForm
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 4
     Visible = False
     object QuestionLbl: TLabel
       Left = 40
-      Top = 56
+      Top = 40
       Width = 69
       Height = 19
       Caption = 'Question:'
@@ -364,7 +369,7 @@ object MakerForm: TMakerForm
     end
     object Answer1Lbl: TLabel
       Left = 40
-      Top = 136
+      Top = 120
       Width = 73
       Height = 19
       Caption = 'Answer 1:'
@@ -378,7 +383,7 @@ object MakerForm: TMakerForm
     end
     object Answer2Lbl: TLabel
       Left = 40
-      Top = 200
+      Top = 184
       Width = 73
       Height = 19
       Caption = 'Answer 2:'
@@ -392,7 +397,7 @@ object MakerForm: TMakerForm
     end
     object Answer3Lbl: TLabel
       Left = 40
-      Top = 264
+      Top = 248
       Width = 73
       Height = 19
       Caption = 'Answer 3:'
@@ -406,7 +411,7 @@ object MakerForm: TMakerForm
     end
     object Answer4Lbl: TLabel
       Left = 40
-      Top = 328
+      Top = 312
       Width = 73
       Height = 19
       Caption = 'Answer 4:'
@@ -420,7 +425,7 @@ object MakerForm: TMakerForm
     end
     object CorrectAnswerLbl: TLabel
       Left = 8
-      Top = 408
+      Top = 392
       Width = 115
       Height = 19
       Caption = 'Correct Answer:'
@@ -434,7 +439,7 @@ object MakerForm: TMakerForm
     end
     object QuestionEd: TDeftEdit
       Left = 128
-      Top = 32
+      Top = 16
       Width = 641
       Height = 65
       AutoSelect = False
@@ -454,7 +459,7 @@ object MakerForm: TMakerForm
     end
     object Answer1Ed: TDeftEdit
       Left = 128
-      Top = 120
+      Top = 104
       Width = 641
       Height = 57
       AutoSize = False
@@ -473,7 +478,7 @@ object MakerForm: TMakerForm
     end
     object Answer2Ed: TDeftEdit
       Left = 128
-      Top = 184
+      Top = 168
       Width = 641
       Height = 57
       AutoSize = False
@@ -492,7 +497,7 @@ object MakerForm: TMakerForm
     end
     object Answer3Ed: TDeftEdit
       Left = 128
-      Top = 248
+      Top = 232
       Width = 641
       Height = 57
       AutoSize = False
@@ -511,7 +516,7 @@ object MakerForm: TMakerForm
     end
     object Answer4Ed: TDeftEdit
       Left = 128
-      Top = 312
+      Top = 296
       Width = 641
       Height = 57
       AutoSize = False
@@ -530,7 +535,7 @@ object MakerForm: TMakerForm
     end
     object CorrectAnswerEd: TDeftEdit
       Left = 128
-      Top = 392
+      Top = 376
       Width = 641
       Height = 57
       AutoSize = False
@@ -549,7 +554,7 @@ object MakerForm: TMakerForm
     end
     object NextBtn: TButton
       Left = 696
-      Top = 456
+      Top = 440
       Width = 75
       Height = 25
       Caption = 'Next >'
@@ -561,7 +566,7 @@ object MakerForm: TMakerForm
     end
     object ExitBtn: TButton
       Left = 128
-      Top = 456
+      Top = 440
       Width = 75
       Height = 25
       Caption = 'Exit'
@@ -572,7 +577,7 @@ object MakerForm: TMakerForm
     end
     object BackBtn: TButton
       Left = 536
-      Top = 456
+      Top = 440
       Width = 75
       Height = 25
       Caption = '< Back'
@@ -583,7 +588,7 @@ object MakerForm: TMakerForm
     end
     object SaveBtn: TButton
       Left = 616
-      Top = 456
+      Top = 440
       Width = 75
       Height = 25
       Caption = 'Save'
@@ -594,7 +599,7 @@ object MakerForm: TMakerForm
     end
     object StatusBar1: TStatusBar
       Left = 1
-      Top = 491
+      Top = 483
       Width = 790
       Height = 19
       Panels = <>

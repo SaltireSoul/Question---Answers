@@ -43,6 +43,7 @@ type
     Procedure PlayDefault;
     Procedure PlayCustom;
     Procedure PlayMySound(Filename: string);
+    Procedure SetLang;
   end;
 
 var
@@ -73,6 +74,7 @@ procedure TStudentsForm.FormShow(Sender: TObject);
 begin
   PreviousAnswerLbl.Caption:='';
   NextBtn.Enabled:=true;
+  SetLang;
   DisplayTopic;
   Setup;
   ReadQuestions;
@@ -196,14 +198,14 @@ procedure TStudentsForm.CheckAnswers;
 begin
   if correctanswer=useranswer then
     begin
-      PreviousAnswerLbl.caption:='Well Done!!';
+      PreviousAnswerLbl.caption:=Lang[21];
       Score:=Score+1;
       ScoreLbl.caption:=inttostr(Score);
       PlaySounds('correct');
     end
   else
     begin
-      PreviousAnswerLbl.caption:='The correct answer was : '+correctanswer;
+      PreviousAnswerLbl.caption:=Lang[22]+' : '+correctanswer;
       PlaySounds('wrong');
     end;
 end;
@@ -322,6 +324,14 @@ var
 begin
   CFileName:=ProgramPath+FileName;
   PlaySound(PChar(CFileName),snd_FileName and snd_ASync or snd_Memory,1);
+end;
+
+procedure TStudentsForm.SetLang;
+begin
+   TimelefttextLbl.Caption := Lang[18];
+   ScoretextLbl.Caption := Lang[19];
+   PreviousAnswerGbox.Caption := Lang[20];
+   NextBtn.Caption := Lang[28];
 end;
 
 end.

@@ -1,6 +1,6 @@
 object StudentsForm: TStudentsForm
-  Left = 286
-  Top = 121
+  Left = 487
+  Top = 359
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Quiz'

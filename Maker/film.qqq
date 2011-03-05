@@ -1,0 +1,73 @@
+[Main]
+Topic=Film Quiz
+Questions=10
+[Q1]
+Question=In what year did Judy Garland receive a special 'Mini' Oscar for her role in "The Wizard of OZ" ?
+Answer1=1938
+Answer2=1939
+Answer3=1943
+Answer4=1954
+Correct=1939
+[Q2]
+Question=Bob Hope appeared with which famous crooner for a series of "Road to..." movies ?
+Answer1=Frank Sinatra
+Answer2=Dean Martin
+Answer3=Tony Bennett
+Answer4=Bing Crosby
+Correct=Bing Crosby
+[Q3]
+Question=In which film did the character of Marion Crane famously die ? 
+Answer1=The Grudge
+Answer2=Psycho
+Answer3=Dark Victory
+Answer4=The Wicker Man
+Correct=Psycho
+[Q4]
+Question=Who was the first black male actor to win an Oscar ?
+Answer1=Samuel L. Jackson
+Answer2=Denzel Washington
+Answer3=Sidney Poitier
+Answer4=Danny Glover
+Correct=Sidney Poitier
+[Q5]
+Question=Who took over as the Saint from Roger Moore ?
+Answer1=Sean Connery
+Answer2=Patrick McGoohan
+Answer3=Robert Vaughn
+Answer4=Ian Ogilvy
+Correct=Ian Ogilvy
+[Q6]
+Question=Which famous actress starred in "High Society" ?
+Answer1=Marilyn Monroe
+Answer2=Greta Garbo
+Answer3=Grace Kelly
+Answer4=Judy Garland
+Correct=Grace Kelly
+[Q7]
+Question=What was the first 'carry on' film ?
+Answer1=Carry on Nurse
+Answer2=Carry on Teacher
+Answer3=Carry on Sergeant
+Answer4=Carry on Constable
+Correct=Carry on Sergeant
+[Q8]
+Question=Who played the title role in the film "Spartacus" ?
+Answer1=Russell Crowe
+Answer2=Kirk Douglas
+Answer3=Lloyd Bridges
+Answer4=Charlton Heston
+Correct=Kirk Douglas
+[Q9]
+Question=What was Marilyn Monroe's real name ? 
+Answer1=Nora Jane Beaker
+Answer2=Norma Jean Baker
+Answer3=Marilyn Monroe
+Answer4=Frances Gumm
+Correct=Norma Jean Baker
+[Q10]
+Question=Who wrote "The Sound of Music" ?
+Answer1=Irving Berlin
+Answer2=Rodgers and Hammerstein
+Answer3=Simon and Garfunkel
+Answer4=Gilbert and Sullivan
+Correct=Rodgers and Hammerstein

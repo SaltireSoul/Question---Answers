@@ -40,6 +40,7 @@ type
     Procedure PlayCustomSounds;
     Function CheckCustomMessagesFile:boolean;
     Procedure PlayMySound(Filename:string);
+    Procedure SetLang;
   end;
 
 var
@@ -87,6 +88,7 @@ const
   CNotBad='NotBad.wav';
   CTryAgain='TryAgain.wav';
 begin
+  SetLang;
   CalcPercentage;
   DisplayScores;
 
@@ -138,24 +140,21 @@ procedure TOutputForm.DisplayMessage;
 begin
   if percentage>=90 then
     begin
-      MessageLbl.caption:='Brilliant!';
+      MessageLbl.caption:= Lang[23];
     end
   else if percentage>=75 then
     begin
-      MessageLbl.caption:='Good!';
+      MessageLbl.caption:=Lang[24];
     end
   else if percentage>=55 then
     begin
-      MessageLbl.caption:='Fair!';
+      MessageLbl.caption:=Lang[25];
     end
   else if percentage>=40 then
     begin
-      MessageLbl.caption:='Not too bad!';
+      MessageLbl.caption:=Lang[26];
     end
-  else if percentage<40 then
-    begin
-      MessageLbl.caption:='Read the book again';
-    end;
+  else MessageLbl.caption:=Lang[27];
 end;
 
 procedure TOutputForm.DisplayCustomMessage;
@@ -352,6 +351,16 @@ begin
   end;
 
   CloseFile(Filein);
+end;
+
+procedure TOutputForm.SetLang;
+begin
+   YouScoredtextLbl.Caption := Lang[32];
+   YouGottextLbl.Caption := Lang[33];
+   OutOftextLbl.Caption := Lang[34];
+   ResetBtn.Caption := Lang[29];
+   NewBtn.Caption := Lang[30];
+   ExitBtn.Caption := Lang[5];
 end;
 
 end.
