@@ -60,21 +60,22 @@ type
     Procedure SaveSettings;
     Procedure LoadSettings;
     Function  CheckSettingsFile:boolean;
+    Procedure SetProgramPath;
   end;
 
 var
   TeachersForm: TTeachersForm;
   Filename:string;               //The Question papers filename
-  Topic:string[30];              //The Topic of the Question paper
+  Topic:WideString;              //The Topic of the Question paper
   TimeLimit:integer;             //Set the time limit for each question
   NoOfQuestions:integer;         //The No. Of Question in the paper
-  Question:string[149];          //The Question
-  Answer1:string[59];            //Possible Answer 1
-  Answer2:string[59];            //Possible Answer 2
-  Answer3:string[59];            //Possible Answer 3
-  Answer4:string[59];            //Possible Answer 4
-  UserAnswer:string;             //The users answer
-  CorrectAnswer:string[59];      //The Correct Answer
+  Question:WideString;           //The Question - 304 chars
+  Answer1:WideString;            //Possible Answer 1 - 249 chars
+  Answer2:WideString;            //Possible Answer 2 - 249 chars
+  Answer3:WideString;            //Possible Answer 3 - 249 chars
+  Answer4:WideString;            //Possible Answer 4 - 249 chars
+  UserAnswer:WideString;         //The users answer
+  CorrectAnswer:WideString;      //The Correct Answer - 249 chars
   CurrentQuestion:integer;       //The current question no. e.g. 1, 2, 3 etc...
   QuestionNo:string;             //The current question no. for reading question e.g. Q1, Q2 ,Q3 etc...
   Score:integer;                 //Running Score Counter
@@ -82,6 +83,8 @@ var
 
   HelpFilePath:string;           //Filename & Path of HelpFile
   HelpOpen:boolean=false;
+
+  ProgramPath:string;            //Programs Own Path
 
   CustomMessage:boolean=false;
   CustomSounds:boolean=false;
@@ -220,6 +223,7 @@ end;
 
 procedure TTeachersForm.FormCreate(Sender: TObject);
 begin
+  SetProgramPath;
   LoadSettings;
 
   If ParamStr(1)<>'' then
@@ -269,8 +273,8 @@ end;
 
 procedure TTeachersForm.RegisterFileTypesClick(Sender: TObject);
 begin
-  RegEditor('QQQ',ExtractFilePath(ParamStr(0))+ExtractFileName(ParamStr(0)));
-  RegQuiz('QQQ',ExtractFilePath(ParamStr(0))+'Quiz.exe');
+  RegEditor('QQQ',ProgramPath+ExtractFileName(ParamStr(0)));
+  RegQuiz('QQQ',ProgramPath+'Quiz.exe');
 end;
 
 procedure TTeachersForm.UseCustomTextClick(Sender: TObject);
@@ -307,14 +311,14 @@ const
 
 var
   Filein:TextFile;
-  FileName:string;
+  SettingFileName:string;
   i:integer;
   Input:Array[1..3] of String[5];
 begin
-  FileName:=ExtractFilePath(ParamStr(0))+Settings;
-  If FileExists(FileName) then
+  SettingFileName:=ProgramPath+Settings;
+  If FileExists(SettingFileName) then
     begin
-      AssignFile(Filein,Filename);
+      AssignFile(Filein,SettingFileName);
       Reset(Filein);
 
       For i:=1 to 3 do begin
@@ -370,12 +374,13 @@ const
 
 var
   Fileout:TextFile;
-  FileName:string;
+  SettingFileName:string;
 begin
-  FileName:=ExtractFilePath(ParamStr(0))+Settings;
+  SettingFileName:=ProgramPath+Settings;
   If CheckSettingsFile=True then
     begin
-      AssignFile(Fileout,settings);
+    showmessage(SettingFileName);
+      AssignFile(Fileout,SettingFileName);
       ReWrite(Fileout);
 
       //Save Custom Text Settings
@@ -398,16 +403,21 @@ const
   Settings='settings.dat';
 
 var
-  Filename:string;
+  SettingFileName:string;
   Fileout:TextFile;
 begin
-  FileName:=ExtractFilePath(ParamStr(0))+Settings;
+  SettingFileName:=ProgramPath+Settings;
   {$I-}
   AssignFile(Fileout,settings);
   ReWrite(Fileout);
   {$I+}
   Result:= (IOResult = 0);
   CloseFile(Fileout);
+end;
+
+procedure TTeachersForm.SetProgramPath;
+begin
+   ProgramPath := ExtractFilePath(ParamStr(0));
 end;
 
 end.

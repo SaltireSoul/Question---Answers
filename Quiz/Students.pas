@@ -298,8 +298,8 @@ const
   CCorrect='Correct.wav';
   CWrong='Wrong.wav';
 begin
-  If FileExists(ExtractFilePath(ParamStr(0))+CCorrect)
-  and FileExists(ExtractFilePath(ParamStr(0))+CWrong) then
+  If FileExists(ProgramPath+CCorrect)
+  and FileExists(ProgramPath+CWrong) then
     begin
       If Lowercase(Marked)='correct' then PlayMySound(CCorrect)
         else PlayMySound(CWrong);
@@ -320,7 +320,7 @@ procedure TStudentsForm.PlayMySound(Filename: string);
 var
   CFileName:string;
 begin
-  CFileName:=ExtractFilePath(ParamStr(0))+FileName;
+  CFileName:=ProgramPath+FileName;
   PlaySound(PChar(CFileName),snd_FileName and snd_ASync or snd_Memory,1);
 end;
 

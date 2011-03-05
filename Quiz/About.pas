@@ -16,7 +16,6 @@ type
     Copyright1: TLabel;
     CopyrightLbl: TLabel;
     Copyright2: TLabel;
-    PoweredByDelphi: TImage;
     Label1: TLabel;
     CommentsLbl: TLabel;
     procedure BorlandWebSite(Sender: TObject);

@@ -1,11 +1,11 @@
 object OutputForm: TOutputForm
-  Left = 327
-  Top = 142
+  Left = 390
+  Top = 226
   Width = 370
   Height = 277
   BorderIcons = [biSystemMenu]
   Caption = 'Quiz'
-  Color = 14215660
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -90,7 +90,7 @@ object OutputForm: TOutputForm
     Alignment = taCenter
     AutoSize = False
     Caption = 'Read The Book Again!'
-    Color = 14215660
+    Color = clBtnFace
     Font.Charset = ANSI_CHARSET
     Font.Color = clRed
     Font.Height = -21

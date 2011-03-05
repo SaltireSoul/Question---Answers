@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, ComCtrls, ExtCtrls, inifiles, Menus, XPMenu, registry,
-  shlobj, ImgList;
+  shlobj, ImgList, Md5DeftEdit;
 
 type
   TMakerForm = class(TForm)
@@ -15,13 +15,13 @@ type
     NumberLbl: TStaticText;
     PanelTop: TPanel;
     PanelBottom: TPanel;
-    QuestionEd: TEdit;
+    QuestionEd: TDeftEdit;
     QuestionLbl: TLabel;
-    Answer1Ed: TEdit;
-    Answer2Ed: TEdit;
-    Answer3Ed: TEdit;
-    Answer4Ed: TEdit;
-    CorrectAnswerEd: TEdit;
+    Answer1Ed: TDeftEdit;
+    Answer2Ed: TDeftEdit;
+    Answer3Ed: TDeftEdit;
+    Answer4Ed: TDeftEdit;
+    CorrectAnswerEd: TDeftEdit;
     Answer1Lbl: TLabel;
     Answer2Lbl: TLabel;
     Answer3Lbl: TLabel;
@@ -78,19 +78,19 @@ type
 var
   MakerForm: TMakerForm;
   FileName:string;               //Sets the FileName to be used
-  Topic:string[30];              //The Topic of the Question paper
+  Topic:string;                  //The Topic of the Question paper
   NoOfQuestions:integer;         //The No. Of Question in the paper
-  Question:string[149];          //The Question
-  Answer1:string[59];            //Possible Answer 1
-  Answer2:string[59];            //Possible Answer 2
-  Answer3:string[59];            //Possible Answer 3
-  Answer4:string[59];            //Possible Answer 4
-  CorrectAnswer:string[59];      //The Correct Answer
+  Question:WideString;           //The Question
+  Answer1:WideString;            //Possible Answer 1
+  Answer2:WideString;            //Possible Answer 2
+  Answer3:WideString;            //Possible Answer 3
+  Answer4:WideString;            //Possible Answer 4
+  CorrectAnswer:WideString;      //The Correct Answer
   CurrentQuestion:integer=1;     //The current question no. e.g. 1, 2, 3 etc...
   QuestionNo:string='Q1';        //The current question no. for writing question e.g. Q1, Q2 ,Q3 etc...
   ReOpen:boolean=false;          //Indicates if file has already been saved and re-opened
   ReOpenCount:integer=0;         //Sets the Number of Questions in the Old File
-  NeedText:boolean=true;	 //Indicates if there is a need for more text before saving
+  NeedText:boolean=true;      	 //Indicates if there is a need for more text before saving
 
 implementation
 

@@ -93,7 +93,7 @@ begin
   //Display Custom Messages if Ok
   If CustomMessage then
     begin
-      If FileExists(ExtractFilePath(ParamStr(0))+CFileName) then
+      If FileExists(ProgramPath+CFileName) then
         begin
           If CheckCustomMessagesFile then DisplayCustomMessage
             else DisplayMessage;
@@ -111,11 +111,11 @@ begin
 
   If CustomSounds then
     begin
-      If FileExists(ExtractFilePath(ParamStr(0))+CBrilliant)
-      and FileExists(ExtractFilePath(ParamStr(0))+CGood)
-      and FileExists(ExtractFilePath(ParamStr(0))+CFair)
-      and FileExists(ExtractFilePath(ParamStr(0))+CNotBad)
-      and FileExists(ExtractFilePath(ParamStr(0))+CTryAgain) then
+      If FileExists(ProgramPath+CBrilliant)
+      and FileExists(ProgramPath+CGood)
+      and FileExists(ProgramPath+CFair)
+      and FileExists(ProgramPath+CNotBad)
+      and FileExists(ProgramPath+CTryAgain) then
         begin
           PlayCustomSounds;
         end
@@ -170,7 +170,7 @@ var Filein:TextFile;
     Messages:Array[1..5] of String[23];
     Filename:string;
 begin
-  Filename:=ExtractFilePath(ParamStr(0))+CFileName;
+  Filename:=ProgramPath+CFileName;
   AssignFile(Filein,Filename);
   Reset(Filein);
 
@@ -305,7 +305,7 @@ procedure TOutputForm.PlayMySound(Filename: string);
 var
   CFileName:string;
 begin
-  CFileName:=ExtractFilePath(ParamStr(0))+FileName;
+  CFileName:=ProgramPath+FileName;
   PlaySound(PChar(CFileName),snd_FileName and snd_ASync or snd_Memory,1);
 end;
 
@@ -331,7 +331,7 @@ var
   temp:string;
   Filename:string;
 begin
-  Filename:=ExtractFilePath(ParamStr(0))+CFileName;
+  Filename:=ProgramPath+CFileName;
   AssignFile(Filein,Filename);
   Reset(Filein);
 
