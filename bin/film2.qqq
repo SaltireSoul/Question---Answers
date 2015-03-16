@@ -1,0 +1,73 @@
+[Main]
+Topic=Film Quiz 2
+Questions=10
+[Q1]
+Question=In what year was the movie "2001: A Space Odyssey" first released ?
+Answer1=1965
+Answer2=1968
+Answer3=1980
+Answer4=2001
+Correct=1968
+[Q2]
+Question=Who played Hannibal Leckter in the 1986 movie "Manhunter" ? 
+Answer1=William Peterson
+Answer2=Anthony Hopkins
+Answer3=Brian Cox
+Answer4=Sean Bean
+Correct=Brian Cox
+[Q3]
+Question=Who directed "An American Werewolf in London" ?
+Answer1=John Carpenter
+Answer2=Joe Dante
+Answer3=John Landis
+Answer4=Ivan Reitman
+Correct=John Landis
+[Q4]
+Question=In the original "War of the Worlds", what planet did the aliens come from ?
+Answer1=Mars
+Answer2=Venus
+Answer3=Jupiter
+Answer4=Pluto
+Correct=Mars
+[Q5]
+Question=Which young actress was originally chosen to play the role of Dorothy in "The Wizard of Oz" ?
+Answer1=Judy Garland
+Answer2=Ann Rutherford
+Answer3=Ann Miller
+Answer4=Shirley Temple
+Correct=Shirley Temple
+[Q6]
+Question=In which Marx Brothers movie did Marilyn Monroe make an appearance ?
+Answer1=Go West
+Answer2=A Day at the Races
+Answer3=Room Service
+Answer4=Love Happy
+Correct=Love Happy
+[Q7]
+Question=Who directed the 1931 classic "Dracula" starring Bela Lugosi ?
+Answer1=James Whale
+Answer2=Tod Browning
+Answer3=George Waggner
+Answer4=F.W.Murnau
+Correct=Tod Browning
+[Q8]
+Question=Which actress played opposite Cary Grant in Alfred Hitchcock's "Notorius" ?
+Answer1=Ingrid Bergman
+Answer2=Grace Kelly
+Answer3=Eva Marie Saint
+Answer4=Joan Fontaine
+Correct=Ingrid Bergman
+[Q9]
+Question=The Tim Burton movie "Sleepy Hollow" starred which horror flick legend ?
+Answer1=Peter Cushing
+Answer2=Vincent Price
+Answer3=Christopher Lee
+Answer4=John Carradine
+Correct=Christopher Lee
+[Q10]
+Question=Which famous author wrote "The Pit and the Pendulum" ?
+Answer1=H.P.Lovecraft
+Answer2=Edgar Allan Poe
+Answer3=H.G. Wells
+Answer4=Bram Stoker
+Correct=Edgar Allan Poe
